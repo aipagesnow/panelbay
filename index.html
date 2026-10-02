@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Bay — fence tally</title>
+  <meta name="description" content="Count panels, posts, Postcrete bags and gravel boards for one fence run.">
+  <meta name="theme-color" content="#14110e">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:title" content="Panel Bay — fence tally">
+  <meta property="og:description" content="Count panels, posts, Postcrete bags and gravel boards for one fence run.">
+  <meta property="og:image" content="/og.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Panel Bay — fence tally">
+  <meta name="twitter:description" content="Count panels, posts, Postcrete bags and gravel boards for one fence run.">
+  <meta name="twitter:image" content="/og.png">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to the tally</a>
+  <header class="top">
+    <a class="brand" href="/">
+      <svg class="mark" viewBox="0 0 16 16" width="32" height="32" aria-hidden="true">
+        <rect x="1" y="1" width="3" height="14" fill="#f3efe6"/>
+        <rect x="12" y="1" width="3" height="14" fill="#f3efe6"/>
+        <rect x="4" y="11" width="8" height="2" fill="#e4ff1a"/>
+      </svg>
+      <h1 class="brand-name">Panel Bay</h1>
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="/" aria-current="page">Tally</a>
+      <a href="/posts/">Posts</a>
+      <a href="/postcrete/">Postcrete</a>
+      <a href="/gravel-boards/">Gravel</a>
+      <a href="/height/">Height</a>
+    </nav>
+  </header>
+  <main id="content">
+    <p class="lede">Measure the run in metres. The tally is the panels, posts, Postcrete and gravel boards for that one line.</p>
+    <div class="layout">
+      <!--form-->
+      <section id="tally" class="tally" aria-live="polite"></section>
+    </div>
+    <figure class="hero">
+      <img src="/hero.jpg" width="1280" height="720" alt="Dark stained close-board fence in daylight, seen along the run, with timber posts in the ground and a gravel board at the base of each bay.">
+      <figcaption>Close-board, shot along the bays.</figcaption>
+    </figure>
+    <section class="method">
+      <h2>How this tally counts</h2>
+      <p>A bay is one panel width. The box starts at 1.83 m, the usual UK panel. Change it if yours are a different width.</p>
+      <p>Full bays are whole panels. If the last bay comes up short, the tally calls it a cut panel. You still buy a whole panel and saw it down. A remainder of 20 mm or less is taken up in the joints, and it is not listed as a cut.</p>
+      <p>A gate is taken out of the run before the panels are counted. It still counts as a bay for the posts. It does not get a gravel board.</p>
+      <p>Posts are one more than the bays, unless an end fixes to a wall. Postcrete follows the post size and the hole on the Postcrete page, in 20 kg bags.</p>
+    </section>
+  </main>
+  <footer class="foot">
+    <p>Panel Bay counts one run. It does not sell timber, and it does not give planning advice.</p>
+  </footer>
+  <script type="module" src="/src/home.ts"></script>
+</body>
+</html>

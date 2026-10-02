@@ -1,0 +1,37 @@
+<form id="run" class="run" novalidate>
+  <div class="pair">
+    <label class="block">
+      <span class="lbl">Run length (m)</span>
+      <input id="length" name="length" inputmode="decimal" autocomplete="off" enterkeyhint="done">
+    </label>
+    <label class="block">
+      <span class="lbl">Panel width (m)</span>
+      <input id="width" name="width" inputmode="decimal" autocomplete="off" value="1.83">
+    </label>
+  </div>
+  <fieldset>
+    <legend>End against a wall</legend>
+    <div class="seg">
+      <label><input type="radio" name="wall" value="0" checked><span>Neither</span></label>
+      <label><input type="radio" name="wall" value="1"><span>One end</span></label>
+      <label><input type="radio" name="wall" value="2"><span>Both ends</span></label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Post size</legend>
+    <div class="seg">
+      <label><input type="radio" name="post" value="75"><span>75 × 75 mm</span></label>
+      <label><input type="radio" name="post" value="100" checked><span>100 × 100 mm</span></label>
+    </div>
+  </fieldset>
+  <div class="gate-row">
+    <label class="check">
+      <input id="gate" name="gate" type="checkbox">
+      <span>Gate in this run</span>
+    </label>
+    <label class="block gate-width" hidden>
+      <span class="lbl">Gate width (m)</span>
+      <input id="gate-width" name="gateWidth" inputmode="decimal" autocomplete="off" value="0.9">
+    </label>
+  </div>
+</form>

@@ -1,0 +1,13 @@
+Panel Bay is a UK fence materials calculator at panelbay.co.uk. Someone with a tape measure types one run and gets panels, posts, Postcrete bags, and gravel boards. Follow STYLE.md, VOICE.md, and MARK-IMAGINE.md in this project.
+
+Look: a surveyor’s tally on a close-board fence. Dark stained timber, sharp white type, one high-vis tape-yellow accent. Not Aivora cream/sage/copper, not an Amazon review page, not a Wickes promo tool, not the Garden map app.
+
+Hard rules:
+- Clean start. This brand only.
+- Calculator first. Inputs: length in metres, panel width default 1.83 m, optional gate, optional end against a wall. Results: panel count (including a cut panel called out, not hidden), posts, Postcrete bags by a stated post size, gravel boards.
+- Pages: home calculator, posts for a run, Postcrete bags, gravel boards, a short height note that points at the council or Planning Portal and does not give legal advice.
+- No satellite map. No Amazon best-of layout. No shop catalogue.
+- Fonts: Barlow Condensed + Source Sans 3, actually installed.
+- Sharp geometric SVG mark (a bay: two posts and a gap, or a tape tick). Sharp at 16px. Favicon + OG pack from that mark. One Imagine daylight fence hero, no text on the image. Title and calculator both clear on a phone.
+- UK English. Plain. No notes, TODOs, or build jargon on the pages.
+- Build must pass. New GitHub repo. Do not attach panelbay.co.uk yet.

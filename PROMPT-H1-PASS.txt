@@ -1,0 +1,9 @@
+Panel Bay add-on. Do not start over. Keep the current build.
+
+If the H1 has an image, it must look right on desktop, tablet, and mobile: title readable, image not cropped into the type, scales without overflow or a huge empty gap. Check all three widths and fix the hero before you stop.
+
+No DNS. Do not attach panelbay.co.uk.
+
+Push to the existing GitHub repo. Leave a Vercel preview URL (do not add the custom domain). Build must still pass.
+
+Done when the hero holds at phone, tablet, and desktop widths, and origin/main has the fix.
