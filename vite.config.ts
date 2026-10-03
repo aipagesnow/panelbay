@@ -25,6 +25,8 @@ export default defineConfig({
         postcrete: resolve(root, "postcrete/index.html"),
         boards: resolve(root, "gravel-boards/index.html"),
         height: resolve(root, "height/index.html"),
+        privacy: resolve(root, "privacy/index.html"),
+        contact: resolve(root, "contact/index.html"),
       },
     },
   },

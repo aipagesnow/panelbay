@@ -1,0 +1,14 @@
+{
+  "headers": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "panelbay.vercel.app" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, follow" }]
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "panelbay.vercel.app" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, follow" }]
+    }
+  ]
+}

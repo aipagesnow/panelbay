@@ -497,6 +497,15 @@ input:not([type]),
   max-width: 40rem;
 }
 
+.foot p + p {
+  margin-top: 0.45rem;
+}
+
+.foot a {
+  text-underline-offset: 0.16em;
+  text-decoration-color: var(--tape);
+}
+
 @media (max-width: 739px) {
   .top,
   main,
@@ -506,14 +515,15 @@ input:not([type]),
 
   .nav {
     flex: 1 0 100%;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 0.35rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.15rem 0.65rem;
+    max-width: 100%;
   }
 
   .nav a {
-    font-size: 0.98rem;
-    letter-spacing: 0.045em;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
   }
 }
 

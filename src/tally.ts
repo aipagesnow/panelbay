@@ -58,6 +58,10 @@ export interface Tally {
   /** Unrounded bag count in tenths. 15 is 1½ bags. */
   bagTenths: number;
   boards: number;
+  /** Millimetres of the panel run taken up in the joints. */
+  jointMm: number;
+  /** Millimetres the tape is short of the panels counted. */
+  shortMm: number;
 }
 
 export interface Row {
@@ -114,19 +118,24 @@ export function formatBagTenths(tenths: number): string {
   return (tenths / 10).toFixed(1);
 }
 
-export function splitPanels(lengthMm: number, widthMm: number): { full: number; cutMm: number } {
-  if (lengthMm <= SLACK_MM) return { full: 0, cutMm: 0 };
+export function splitPanels(
+  lengthMm: number,
+  widthMm: number,
+): { full: number; cutMm: number; jointMm: number; shortMm: number } {
+  if (lengthMm <= SLACK_MM) return { full: 0, cutMm: 0, jointMm: 0, shortMm: 0 };
   const full = Math.floor(lengthMm / widthMm);
   const rem = lengthMm - full * widthMm;
-  if (rem <= SLACK_MM) return { full, cutMm: 0 };
-  if (widthMm - rem <= SLACK_MM) return { full: full + 1, cutMm: 0 };
-  return { full, cutMm: rem };
+  if (rem <= SLACK_MM) return { full, cutMm: 0, jointMm: rem, shortMm: 0 };
+  if (widthMm - rem <= SLACK_MM) {
+    return { full: full + 1, cutMm: 0, jointMm: 0, shortMm: widthMm - rem };
+  }
+  return { full, cutMm: rem, jointMm: 0, shortMm: 0 };
 }
 
 export function countRun(input: RunInput): Tally {
   const spec = POST_SPECS[input.post];
   const panelRunMm = Math.max(0, input.lengthMm - input.gateMm);
-  const { full, cutMm } = splitPanels(panelRunMm, input.widthMm);
+  const { full, cutMm, jointMm, shortMm } = splitPanels(panelRunMm, input.widthMm);
   const panels = full + (cutMm > 0 ? 1 : 0);
   const bays = panels + (input.gateMm > 0 ? 1 : 0);
   const posts = Math.max(0, bays + 1 - input.wall);
@@ -147,6 +156,8 @@ export function countRun(input: RunInput): Tally {
     bags,
     bagTenths,
     boards: panels,
+    jointMm,
+    shortMm,
   };
 }
 
@@ -220,7 +231,15 @@ function panelWhy(t: Tally): { flag: string; why: string } {
     };
   }
   const noun = t.fullPanels === 1 ? "panel" : "panels";
-  return { flag: "", why: `${t.fullPanels} ${noun} at ${width}. Nothing to cut.${gate}` };
+  return { flag: "", why: `${t.fullPanels} ${noun} at ${width}. Nothing to cut.${slackSentence(t)}${gate}` };
+}
+
+function slackSentence(t: Tally): string {
+  if (t.jointMm > 0) return ` ${t.jointMm} mm is taken up in the joints.`;
+  if (t.shortMm > 0) {
+    return ` The tape is ${t.shortMm} mm short of ${formatLength(t.fullPanels * t.widthMm)}.`;
+  }
+  return "";
 }
 
 function postWhy(t: Tally): string {
@@ -247,12 +266,11 @@ function bagWhy(t: Tally): string {
   const base = `${rate} bags of 20 kg for each ${t.post.label} post, in a ${t.post.hole} hole.`;
   if (t.post.id === "75") {
     const exact = formatBagTenths(t.bagTenths);
-    if (t.bags * 10 !== t.bagTenths) {
-      return `${base} That is ${exact} bags on the Postcrete table, rounded up to ${t.bags}.`;
-    }
-    return `${base} That is ${exact} bags on the Postcrete table.`;
+    const allowance = `${base} A rough allowance, not a manufacturer row.`;
+    if (t.bags * 10 !== t.bagTenths) return `${allowance} That is ${exact} bags, rounded up to ${t.bags}.`;
+    return `${allowance} That is ${exact} bags.`;
   }
-  return base;
+  return `${base} Heidelberg PostFix, June 2025, for that post and that hole.`;
 }
 
 function boardWhy(t: Tally): { flag: string; why: string } {
@@ -269,7 +287,7 @@ function boardWhy(t: Tally): { flag: string; why: string } {
     };
   }
   const noun = t.boards === 1 ? "board" : "boards";
-  return { flag: "", why: `${t.boards} ${noun} at ${width}. Nothing to cut.${gate}` };
+  return { flag: "", why: `${t.boards} ${noun} at ${width}. Nothing to cut.${slackSentence(t)}${gate}` };
 }
 
 export function tallyRows(t: Tally): Row[] {

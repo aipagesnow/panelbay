@@ -15,23 +15,23 @@ function run(over: Partial<Parameters<typeof assess>[0]> = {}) {
 
 describe("splitPanels", () => {
   it("calls out a short last bay instead of hiding it in a round-up", () => {
-    expect(splitPanels(10_000, 1830)).toEqual({ full: 5, cutMm: 850 });
+    expect(splitPanels(10_000, 1830)).toEqual({ full: 5, cutMm: 850, jointMm: 0, shortMm: 0 });
   });
 
   it("leaves an exact run uncut", () => {
-    expect(splitPanels(9150, 1830)).toEqual({ full: 5, cutMm: 0 });
+    expect(splitPanels(9150, 1830)).toEqual({ full: 5, cutMm: 0, jointMm: 0, shortMm: 0 });
   });
 
   it("absorbs a remainder of 20 mm into the joints", () => {
-    expect(splitPanels(9170, 1830)).toEqual({ full: 5, cutMm: 0 });
+    expect(splitPanels(9170, 1830)).toEqual({ full: 5, cutMm: 0, jointMm: 20, shortMm: 0 });
   });
 
   it("calls out a remainder of 21 mm", () => {
-    expect(splitPanels(9171, 1830)).toEqual({ full: 5, cutMm: 21 });
+    expect(splitPanels(9171, 1830)).toEqual({ full: 5, cutMm: 21, jointMm: 0, shortMm: 0 });
   });
 
   it("treats a near-full last bay as a whole panel", () => {
-    expect(splitPanels(9150 + 1830 - 20, 1830)).toEqual({ full: 6, cutMm: 0 });
+    expect(splitPanels(9150 + 1830 - 20, 1830)).toEqual({ full: 6, cutMm: 0, jointMm: 0, shortMm: 20 });
   });
 });
 
@@ -52,16 +52,21 @@ describe("a 10 m run", () => {
     expect(rows.find((row) => row.key === "boards")?.why).toContain("cut to 0.85 m");
     expect(rows.find((row) => row.key === "bags")?.why).toContain("100 × 100 mm");
     expect(rows.find((row) => row.key === "bags")?.why).toContain("300 × 600 mm");
+    expect(rows.find((row) => row.key === "bags")?.why).toContain("Heidelberg PostFix, June 2025");
   });
 
-  it("rounds 75 mm posts up from the 1½ bag table row", () => {
+  it("rounds the 75 mm allowance up to whole bags", () => {
     const result = run({ post: "75" });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.tally.posts).toBe(7);
     expect(result.tally.bagTenths).toBe(105);
     expect(result.tally.bags).toBe(11);
-    expect(tallyRows(result.tally).find((row) => row.key === "bags")?.why).toContain("rounded up to 11");
+    const why = tallyRows(result.tally).find((row) => row.key === "bags")?.why ?? "";
+    expect(why).toContain("rounded up to 11");
+    expect(why).toContain("rough allowance");
+    expect(why).not.toContain("Heidelberg");
+    expect(why).not.toMatch(/table/i);
   });
 
   it("drops one post when one end is a wall", () => {
@@ -132,6 +137,30 @@ describe("edges", () => {
     expect(result.tally.panels).toBe(5);
     expect(result.tally.cutMm).toBe(0);
     expect(result.tally.posts).toBe(6);
+  });
+
+  it("shows the millimetres when the tape is short of another panel", () => {
+    const result = run({ length: "5.475" });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.tally.panels).toBe(3);
+    expect(result.tally.cutMm).toBe(0);
+    expect(result.tally.shortMm).toBe(15);
+    const why = tallyRows(result.tally).find((row) => row.key === "panels")?.why ?? "";
+    expect(why).toContain("3 panels at 1.83 m. Nothing to cut.");
+    expect(why).toContain("The tape is 15 mm short of 5.49 m.");
+  });
+
+  it("shows the millimetres taken up in the joints", () => {
+    const result = run({ length: "3.675" });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.tally.panels).toBe(2);
+    expect(result.tally.cutMm).toBe(0);
+    expect(result.tally.jointMm).toBe(15);
+    const why = tallyRows(result.tally).find((row) => row.key === "panels")?.why ?? "";
+    expect(why).toContain("2 panels at 1.83 m. Nothing to cut.");
+    expect(why).toContain("15 mm is taken up in the joints.");
   });
 
   it("fixes one panel between two walls with no post", () => {
