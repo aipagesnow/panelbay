@@ -74,9 +74,34 @@ describe("public pages", () => {
     for (const rule of vercel.headers) {
       expect(rule.headers).toContainEqual({ key: "X-Robots-Tag", value: "noindex, follow" });
     }
-    expect(publicCopy).not.toMatch(/rel=["']canonical["']/);
-    expect(publicCopy).not.toMatch(/panelbay\.co\.uk/);
+    expect(publicCopy).not.toMatch(/panelbay\.vercel\.app/);
+    expect(publicCopy).not.toMatch(/https:\/\/panelbay\.co\.uk/);
     expect(publicCopy).not.toMatch(/@/);
+    expect(readFileSync(join(root, "index.html"), "utf8")).toContain(
+      '<link rel="canonical" href="https://www.panelbay.co.uk/">',
+    );
+    expect(readFileSync(join(root, "height/index.html"), "utf8")).toContain(
+      '<link rel="canonical" href="https://www.panelbay.co.uk/height/">',
+    );
+    expect(readFileSync(join(root, "privacy/index.html"), "utf8")).toContain(
+      '<link rel="canonical" href="https://www.panelbay.co.uk/privacy/">',
+    );
+    expect(readFileSync(join(root, "contact/index.html"), "utf8")).toContain(
+      '<link rel="canonical" href="https://www.panelbay.co.uk/contact/">',
+    );
+    for (const path of ["posts/index.html", "postcrete/index.html", "gravel-boards/index.html"]) {
+      expect(readFileSync(join(root, path), "utf8")).not.toMatch(/rel=["']canonical["']/);
+    }
+    const sitemap = readFileSync(join(root, "public/sitemap.xml"), "utf8");
+    expect(sitemap).toContain("https://www.panelbay.co.uk/");
+    expect(sitemap).toContain("https://www.panelbay.co.uk/height/");
+    expect(sitemap).toContain("https://www.panelbay.co.uk/privacy/");
+    expect(sitemap).toContain("https://www.panelbay.co.uk/contact/");
+    expect(sitemap).not.toMatch(/posts|postcrete|gravel-boards|vercel\.app/);
+    const robots = readFileSync(join(root, "public/robots.txt"), "utf8");
+    expect(robots).toContain("Allow: /");
+    expect(robots).toContain("Sitemap: https://www.panelbay.co.uk/sitemap.xml");
+    expect(robots).not.toMatch(/Disallow:/);
 
     for (const path of ["posts/index.html", "postcrete/index.html", "gravel-boards/index.html"]) {
       expect(readFileSync(join(root, path), "utf8")).toContain('name="robots" content="noindex, follow"');
