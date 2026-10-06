@@ -1,0 +1,15 @@
+# Panel Bay
+
+> Count panels, posts, Postcrete bags and gravel boards for one fence run.
+
+Panel Bay is a UK fence tally for one run. The tally runs in the browser, with no accounts. Panel Bay does not give planning advice.
+
+## Main pages
+
+- [Home](https://www.panelbay.co.uk/): fence tally
+- [Height](https://www.panelbay.co.uk/height/): where to read fence height rules
+
+## About
+
+- [Privacy](https://www.panelbay.co.uk/privacy/)
+- [Contact](https://www.panelbay.co.uk/contact/)
