@@ -20,13 +20,19 @@
   <meta name="twitter:title" content="Privacy — Panel Bay">
   <meta name="twitter:description" content="The Panel Bay tally runs in the browser. No accounts, no ads, and no analytics.">
   <meta name="twitter:image" content="/og.png">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QCXNVEHSS5"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QCXNVEHSS5');
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+(function(){var ID="G-QCXNVEHSS5",K='site-consent';
+function load(){gtag('consent','update',{analytics_storage:'granted'});if(window.__gaLoaded)return;window.__gaLoaded=1;gtag('js',new Date());gtag('config',ID);var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+ID;document.head.appendChild(s);}
+var v=null;try{v=localStorage.getItem(K);}catch(e){}
+if(v==='granted'){load();return;}if(v==='denied')return;
+function show(){if(document.getElementById('cc-bar'))return;var b=document.createElement('div');b.id='cc-bar';b.setAttribute('role','dialog');b.setAttribute('aria-label','Cookie choice');
+b.style.cssText='position:fixed;top:12px;right:12px;left:auto;z-index:2147483000;max-width:340px;width:calc(100% - 24px);background:#fff;color:#111;border:1px solid #d0d5da;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.15);padding:10px 12px;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-wrap:wrap;align-items:center;gap:8px';
+b.innerHTML='<span style="flex:1 1 180px">We use analytics cookies to see which pages help.</span><button type="button" data-c="granted" style="padding:6px 12px;border-radius:6px;border:0;background:#111;color:#fff;font:inherit;cursor:pointer">Accept</button><button type="button" data-c="denied" style="padding:6px 12px;border-radius:6px;border:1px solid #888;background:#fff;color:#111;font:inherit;cursor:pointer">Reject</button>';
+b.addEventListener('click',function(e){var c=e.target&&e.target.getAttribute&&e.target.getAttribute('data-c');if(!c)return;try{localStorage.setItem(K,c);}catch(x){}b.remove();if(c==='granted')load();});
+document.body.appendChild(b);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',show);else show();})();
 </script>
 </head>
 <body>
