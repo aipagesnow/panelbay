@@ -585,3 +585,95 @@ input:not([type]),
     break-inside: avoid;
   }
 }
+
+/* Guide sections: tables, diagrams, FAQ, sources */
+.guide {
+  margin-top: 2rem;
+  max-width: 44rem;
+}
+.guide h2 {
+  margin: 1.8rem 0 0.55rem;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 1.45rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.guide h3 {
+  margin: 1rem 0 0.3rem;
+  font-size: 1.05rem;
+}
+.guide p,
+.guide li {
+  margin: 0 0 0.7rem;
+}
+.guide ol,
+.guide ul {
+  padding-left: 1.25rem;
+}
+.table-wrap {
+  overflow-x: auto;
+  margin: 0.4rem 0 1rem;
+}
+.guide table {
+  border-collapse: collapse;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+.guide th,
+.guide td {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+.guide th {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+}
+.guide caption {
+  text-align: left;
+  color: var(--dim);
+  font-size: 0.92rem;
+  caption-side: bottom;
+  padding-top: 0.4rem;
+}
+.diagram {
+  margin: 0.6rem 0 1.2rem;
+}
+.diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 40rem;
+}
+.diagram figcaption {
+  margin-top: 0.35rem;
+  color: var(--dim);
+  font-size: 0.92rem;
+}
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: 0.55rem 0;
+}
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.faq details p {
+  margin: 0.5rem 0 0.2rem;
+}
+.sources {
+  font-size: 0.95rem;
+  color: var(--dim);
+}
+.sources a {
+  text-underline-offset: 0.16em;
+  text-decoration-color: var(--tape);
+}
+.checked {
+  font-size: 0.92rem;
+  color: var(--dim);
+}
