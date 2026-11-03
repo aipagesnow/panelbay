@@ -3,7 +3,7 @@ import { listText, shoppingList } from "./list";
 import { assess, tallyRows, type Assessed, type Focus, type Row } from "./tally";
 
 const STORAGE = "panelbay-run";
-const LOCAL = new Set(["/", "/posts/", "/postcrete/", "/gravel-boards/", "/height/", "/closeboard/"]);
+const LOCAL = new Set(["/", "/posts/", "/postcrete/", "/gravel-boards/", "/height/", "/closeboard/", "/fence-cost/"]);
 
 export function bind(focus: Focus | null): void {
   const form = document.querySelector<HTMLFormElement>("#run");

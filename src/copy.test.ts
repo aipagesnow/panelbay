@@ -32,6 +32,7 @@ describe("public pages", () => {
     expect(names).toContain("/privacy/index.html");
     expect(names).toContain("/contact/index.html");
     expect(names).toContain("/closeboard/index.html");
+    expect(names).toContain("/fence-cost/index.html");
   });
 
   it("stay in this brand's voice", () => {

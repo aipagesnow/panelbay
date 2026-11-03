@@ -28,6 +28,7 @@ export default defineConfig({
         privacy: resolve(root, "privacy/index.html"),
         contact: resolve(root, "contact/index.html"),
         closeboard: resolve(root, "closeboard/index.html"),
+        cost: resolve(root, "fence-cost/index.html"),
       },
     },
   },
