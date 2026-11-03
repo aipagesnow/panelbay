@@ -131,8 +131,8 @@ describe("public pages", () => {
     const postcrete = readFileSync(join(root, "postcrete/index.html"), "utf8");
     expect(postcrete).toContain("Heidelberg PostFix");
     expect(postcrete).toContain("June 2025");
-    expect(postcrete.split("75 × 75")[1]).toContain("rough allowance");
-    expect(postcrete.split("75 × 75")[1]).not.toContain("Heidelberg");
+    expect(postcrete).toContain("Blue Circle");
+    expect(postcrete).toContain("December 2023");
     const home = readFileSync(join(root, "index.html"), "utf8");
     expect(home).toContain("taken up in the joints");
     expect(home).toContain("short of another full panel");

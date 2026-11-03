@@ -266,7 +266,7 @@ function bagWhy(t: Tally): string {
   const base = `${rate} bags of 20 kg for each ${t.post.label} post, in a ${t.post.hole} hole.`;
   if (t.post.id === "75") {
     const exact = formatBagTenths(t.bagTenths);
-    const allowance = `${base} A rough allowance, not a manufacturer row.`;
+    const allowance = `${base} Blue Circle Postcrete table, December 2023, for that post and that hole.`;
     if (t.bags * 10 !== t.bagTenths) return `${allowance} That is ${exact} bags, rounded up to ${t.bags}.`;
     return `${allowance} That is ${exact} bags.`;
   }

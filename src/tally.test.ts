@@ -64,9 +64,8 @@ describe("a 10 m run", () => {
     expect(result.tally.bags).toBe(11);
     const why = tallyRows(result.tally).find((row) => row.key === "bags")?.why ?? "";
     expect(why).toContain("rounded up to 11");
-    expect(why).toContain("rough allowance");
+    expect(why).toContain("Blue Circle Postcrete table, December 2023");
     expect(why).not.toContain("Heidelberg");
-    expect(why).not.toMatch(/table/i);
   });
 
   it("drops one post when one end is a wall", () => {
