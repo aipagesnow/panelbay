@@ -1,4 +1,5 @@
 import "./style.css";
+import { listText, shoppingList } from "./list";
 import { assess, tallyRows, type Assessed, type Focus, type Row } from "./tally";
 
 const STORAGE = "panelbay-run";
@@ -29,7 +30,10 @@ export function bind(focus: Focus | null): void {
     }
     syncLinks(query);
     const host = document.querySelector<HTMLElement>("#tally");
-    if (host && focus) renderTally(host, assess(readRaw(form)), focus);
+    const result = assess(readRaw(form));
+    if (host && focus) renderTally(host, result, focus);
+    const list = document.querySelector<HTMLElement>("#list");
+    if (list) renderList(list, result);
   };
 
   form.addEventListener("submit", (event) => event.preventDefault());
@@ -187,4 +191,33 @@ function renderRow(row: Row, mode: "even" | "focus" | "quiet"): HTMLElement {
   why.textContent = row.why;
   article.append(link, figure, why);
   return article;
+}
+
+function renderList(host: HTMLElement, result: Assessed): void {
+  const items = host.querySelector<HTMLElement>(".list-items");
+  const copy = host.querySelector<HTMLButtonElement>(".list-copy");
+  if (!items) return;
+  host.hidden = !result.ok;
+  if (!result.ok) return;
+  const tally = result.tally;
+  items.replaceChildren(
+    ...shoppingList(tally).map((line) => {
+      const li = document.createElement("li");
+      li.textContent = line;
+      return li;
+    }),
+  );
+  const print = host.querySelector<HTMLButtonElement>(".list-print");
+  if (print) print.onclick = () => window.print();
+  if (copy) {
+    copy.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(listText(tally));
+        copy.textContent = "Copied";
+      } catch {
+        copy.textContent = "Copy failed";
+      }
+      setTimeout(() => (copy.textContent = "Copy list"), 2000);
+    };
+  }
 }

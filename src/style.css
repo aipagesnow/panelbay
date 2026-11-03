@@ -677,3 +677,25 @@ input:not([type]),
   font-size: 0.92rem;
   color: var(--dim);
 }
+
+.shopping {
+  margin: 2rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px dashed var(--tape);
+}
+.shopping h2 { margin-top: 0; }
+.list-items { padding-left: 1.2rem; line-height: 1.6; }
+.list-actions button {
+  font: inherit;
+  padding: 0.5rem 0.9rem;
+  margin-right: 0.4rem;
+  background: var(--tape);
+  color: var(--tape-ink);
+  border: 0;
+  cursor: pointer;
+}
+.list-note { color: var(--dim); font-size: 0.95rem; }
+@media print {
+  .list-actions { display: none; }
+  .shopping { border-color: #000; }
+}
