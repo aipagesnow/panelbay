@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.panelbay.co.uk/</loc></url>
-  <url><loc>https://www.panelbay.co.uk/height/</loc></url>
-  <url><loc>https://www.panelbay.co.uk/privacy/</loc></url>
-  <url><loc>https://www.panelbay.co.uk/contact/</loc></url>
+  <url><loc>https://www.panelbay.co.uk/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://www.panelbay.co.uk/postcrete/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://www.panelbay.co.uk/posts/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://www.panelbay.co.uk/gravel-boards/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://www.panelbay.co.uk/height/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://www.panelbay.co.uk/contact/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://www.panelbay.co.uk/privacy/</loc><lastmod>2026-11-03</lastmod></url>
 </urlset>

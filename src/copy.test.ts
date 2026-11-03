@@ -17,7 +17,9 @@ function htmlFiles(dir: string): string[] {
 }
 
 const pages = htmlFiles(root);
-const publicCopy = pages.map((path) => readFileSync(path, "utf8")).join("\n");
+const publicCopy = pages
+  .map((path) => readFileSync(path, "utf8").replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, ""))
+  .join("\n");
 
 describe("public pages", () => {
   it("include the tally pages, privacy and contact", () => {
@@ -64,7 +66,7 @@ describe("public pages", () => {
     expect(height).not.toContain('name="robots"');
   });
 
-  it("keeps the preview host noindex off the pages, and noindex the three material pages", () => {
+  it("keeps the preview host noindex off the pages, and indexes every live page", () => {
     const vercel = JSON.parse(readFileSync(join(root, "vercel.json"), "utf8")) as {
       headers: { source: string; has: { type: string; value: string }[]; headers: { key: string; value: string }[] }[];
     };
@@ -89,24 +91,22 @@ describe("public pages", () => {
     expect(readFileSync(join(root, "contact/index.html"), "utf8")).toContain(
       '<link rel="canonical" href="https://www.panelbay.co.uk/contact/">',
     );
-    for (const path of ["posts/index.html", "postcrete/index.html", "gravel-boards/index.html"]) {
-      expect(readFileSync(join(root, path), "utf8")).not.toMatch(/rel=["']canonical["']/);
+    for (const [path, url] of [["posts/index.html", "/posts/"], ["postcrete/index.html", "/postcrete/"], ["gravel-boards/index.html", "/gravel-boards/"]]) {
+      expect(readFileSync(join(root, path), "utf8")).toContain(`<link rel="canonical" href="https://www.panelbay.co.uk${url}">`);
     }
     const sitemap = readFileSync(join(root, "public/sitemap.xml"), "utf8");
     expect(sitemap).toContain("https://www.panelbay.co.uk/");
     expect(sitemap).toContain("https://www.panelbay.co.uk/height/");
     expect(sitemap).toContain("https://www.panelbay.co.uk/privacy/");
     expect(sitemap).toContain("https://www.panelbay.co.uk/contact/");
-    expect(sitemap).not.toMatch(/posts|postcrete|gravel-boards|vercel\.app/);
+    for (const url of ["/posts/", "/postcrete/", "/gravel-boards/"]) expect(sitemap).toContain(`https://www.panelbay.co.uk${url}`);
+    expect(sitemap).not.toMatch(/vercel\.app/);
     const robots = readFileSync(join(root, "public/robots.txt"), "utf8");
     expect(robots).toContain("Allow: /");
     expect(robots).toContain("Sitemap: https://www.panelbay.co.uk/sitemap.xml");
     expect(robots).not.toMatch(/Disallow:/);
 
-    for (const path of ["posts/index.html", "postcrete/index.html", "gravel-boards/index.html"]) {
-      expect(readFileSync(join(root, path), "utf8")).toContain('name="robots" content="noindex, follow"');
-    }
-    for (const path of ["index.html", "height/index.html", "privacy/index.html", "contact/index.html"]) {
+    for (const path of ["posts/index.html", "postcrete/index.html", "gravel-boards/index.html", "index.html", "height/index.html", "privacy/index.html", "contact/index.html"]) {
       expect(readFileSync(join(root, path), "utf8")).not.toContain('name="robots"');
     }
   });
