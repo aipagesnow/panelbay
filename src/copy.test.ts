@@ -31,6 +31,7 @@ describe("public pages", () => {
     expect(names).toContain("/height/index.html");
     expect(names).toContain("/privacy/index.html");
     expect(names).toContain("/contact/index.html");
+    expect(names).toContain("/closeboard/index.html");
   });
 
   it("stay in this brand's voice", () => {

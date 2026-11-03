@@ -2,7 +2,7 @@ import "./style.css";
 import { assess, tallyRows, type Assessed, type Focus, type Row } from "./tally";
 
 const STORAGE = "panelbay-run";
-const LOCAL = new Set(["/", "/posts/", "/postcrete/", "/gravel-boards/", "/height/"]);
+const LOCAL = new Set(["/", "/posts/", "/postcrete/", "/gravel-boards/", "/height/", "/closeboard/"]);
 
 export function bind(focus: Focus | null): void {
   const form = document.querySelector<HTMLFormElement>("#run");

@@ -27,6 +27,7 @@ export default defineConfig({
         height: resolve(root, "height/index.html"),
         privacy: resolve(root, "privacy/index.html"),
         contact: resolve(root, "contact/index.html"),
+        closeboard: resolve(root, "closeboard/index.html"),
       },
     },
   },
