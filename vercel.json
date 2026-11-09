@@ -2,13 +2,75 @@
   "headers": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "panelbay.vercel.app" }],
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, follow" }]
+      "has": [
+        {
+          "type": "host",
+          "value": "panelbay.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
     },
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "panelbay.vercel.app" }],
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, follow" }]
+      "has": [
+        {
+          "type": "host",
+          "value": "panelbay.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/postcrete",
+      "destination": "/postcrete/",
+      "permanent": true
+    },
+    {
+      "source": "/posts",
+      "destination": "/posts/",
+      "permanent": true
+    },
+    {
+      "source": "/gravel-boards",
+      "destination": "/gravel-boards/",
+      "permanent": true
+    },
+    {
+      "source": "/height",
+      "destination": "/height/",
+      "permanent": true
+    },
+    {
+      "source": "/closeboard",
+      "destination": "/closeboard/",
+      "permanent": true
+    },
+    {
+      "source": "/fence-cost",
+      "destination": "/fence-cost/",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/",
+      "permanent": true
     }
   ]
 }
