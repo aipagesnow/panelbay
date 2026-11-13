@@ -5,12 +5,25 @@ import { defineConfig, type Plugin } from "vite";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 
+const vercelInsights = `
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+`;
+
 function formPartial(): Plugin {
   return {
     name: "panelbay-form",
     transformIndexHtml(html) {
       const form = readFileSync(resolve(root, "src/partials/form.html"), "utf8");
-      return html.replaceAll("<!--form-->", form.trim());
+      return html
+        .replaceAll("<!--form-->", form.trim())
+        .replace("</body>", `${vercelInsights}</body>`);
     },
   };
 }
