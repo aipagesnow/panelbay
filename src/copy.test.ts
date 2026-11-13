@@ -121,9 +121,9 @@ describe("public pages", () => {
     }
     const privacy = readFileSync(join(root, "privacy/index.html"), "utf8");
     expect(privacy).toContain("The tally runs in the browser.");
-    expect(privacy).toContain("There are no accounts.");
-    expect(privacy).toContain("no ads and no analytics");
-    expect(privacy).toContain("updated before either is added");
+    expect(privacy).toContain("There are no accounts");
+    expect(privacy).toContain("Vercel Web Analytics and Speed Insights");
+    expect(privacy).toContain("Google Analytics only loads if you click Accept");
     const contact = readFileSync(join(root, "contact/index.html"), "utf8");
     expect(contact).toContain("no inbox on this preview");
     expect(contact).toContain("does not take accounts");
